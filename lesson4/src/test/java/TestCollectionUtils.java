@@ -152,18 +152,8 @@ public class TestCollectionUtils {
     @Test
     public void testMethodRangeWithComparator() {
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8);
-        Comparator<Integer> lessImportant = Comparator.naturalOrder();
-//        Comparator<Integer> lambdaSortByname =
-//                (Integer f1, Integer f2) -> f1.compareTo(f2);
-
-
-        /*Comparator<Integer> comparator = new Comparator<Integer>() {
-            @Override
-            public int compare(Integer integer, Integer t1) {
-                return integer.compareTo(t1);
-            }
-        };*/
-        List<Integer> expected = CollectionUtils.range(list, 2, 5, lessImportant);
+        Comparator<Integer> comp = Comparator.naturalOrder();
+        List<Integer> expected = CollectionUtils.range(list, 2, 5, comp);
         List<Integer> actual = Arrays.asList(2, 3, 4, 5);
         Assert.assertEquals(expected, actual);
     }
