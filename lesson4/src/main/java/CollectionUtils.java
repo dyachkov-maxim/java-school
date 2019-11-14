@@ -28,18 +28,16 @@ public class CollectionUtils {
         return -1;
     }
 
-    public static <T> List<? super T> limit(List<T> source, int size) {
-        List<T> list = source.subList(0, size - 1);
-        return list;
+    public static <T> List<T> limit(List<T> source, int size) {
+        return source.subList(0, size - 1);
     }
 
     public static void add(List<? super Object> source, Object o) {
         source.add(o);
     }
 
-    public static void removeAll(List<?> removeFrom, List<?>  c2) {
+    public static <T> void removeAll(List<T> removeFrom, List<T>  c2) {
         boolean ret = removeFrom.removeAll(c2);
-        int k = 0;
     }
 
     public static boolean containsAll(List<?> c1, List<?> c2) {
