@@ -21,7 +21,7 @@ public class TerminalImpl implements Terminal {
 
     @Override
     public boolean pullMoney(int amount) {
-
+        return false;
     }
 
     public void getMenu(int pin) {
