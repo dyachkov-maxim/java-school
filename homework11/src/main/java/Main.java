@@ -36,12 +36,13 @@ public class Main {
 
     public void simpleMultithread() {
         long start = System.currentTimeMillis();
-
-        list.remove(0);
         List<Thread> threadList = new ArrayList<>();
         List<CounterUnicWords> counterUnicWordsList = new ArrayList<>();
+
+        int index = 0;
         for (String path : list) {
             CounterUnicWords counterUnicWords = new CounterUnicWords();
+            counterUnicWords.setPath(list.get(index++));
             counterUnicWordsList.add(counterUnicWords);
             threadList.add(new Thread(counterUnicWords));
         }

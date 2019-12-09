@@ -1,3 +1,9 @@
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
+
 public class CounterUnicWords implements Runnable {
     private String path;
     private int count = 0;
@@ -23,7 +29,7 @@ public class CounterUnicWords implements Runnable {
         boolean flag = false;
         for (int i = 0; i < text.length(); i++) {
             if (isLetter(text.charAt(i))) {
-                if (! flag) {
+                if (!flag) {
                     flag = true;
                 }
             } else {
@@ -43,22 +49,21 @@ public class CounterUnicWords implements Runnable {
 
     public int calc() {
         System.out.println(String.format("In calc thread#%d", Thread.currentThread().getId()));
-// чтение из файла
-//        try {
-//            //Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-        return calc0("Professional1way2to3prepare4programming5contest6problem7890");
+        return calc0(readAll());
     }
 
     @Override
     public void run() {
-//        try {
-//            Thread.sleep(500);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
         this.calc();
+    }
+
+    private String readAll() {
+        StringBuilder contentBuilder = new StringBuilder();
+        try (Stream<String> stream = Files.lines(Paths.get(path), StandardCharsets.UTF_8)) {
+            stream.forEach(s -> contentBuilder.append(s).append("\n"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return contentBuilder.toString();
     }
 }
