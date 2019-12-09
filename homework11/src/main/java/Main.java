@@ -18,7 +18,11 @@ public class Main {
 
         Main app = new Main();
         app.oneThread();
+        System.out.println("------------------------------------------------------------------");
         app.simpleMultithread();
+        System.out.println("------------------------------------------------------------------");
+        app.multithread();
+        System.out.println("------------------------------------------------------------------");
     }
 
     public void oneThread() {
@@ -49,7 +53,6 @@ public class Main {
 
         threadList.forEach(th -> th.start());
 
-
         for (Thread th : threadList) {
             try {
                 th.join();
@@ -64,6 +67,29 @@ public class Main {
         }
 
         System.out.println("Count words: " + count);
-        System.out.println("Time for oneThread: " + (System.currentTimeMillis() - start) + " ms.");
+        System.out.println("Time for simpleMultithread: " + (System.currentTimeMillis() - start) + " ms.");
+    }
+
+    public void multithread() {
+        long start = System.currentTimeMillis();
+
+        MyPool myPool = new MyPool();
+
+        int count = 0;
+        for (String path : list) {
+            // читаем данные из файла до заполения буффера
+            String buffer = "Professional1way2to3prepare4programming5contest6problem7890";
+            while (true) {
+                boolean ret = myPool.addBatch(buffer);
+                if (ret) {
+                    break;
+                }
+            }
+        }
+
+        int ret = myPool.agregate();
+
+        System.out.println("Count words: " + ret);
+        System.out.println("Time for multithread: " + (System.currentTimeMillis() - start) + " ms.");
     }
 }
