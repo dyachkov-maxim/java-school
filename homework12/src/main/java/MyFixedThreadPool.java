@@ -1,14 +1,6 @@
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
-
-public class MyFixedThreadPool implements MyExecutorService {
-    private final Queue<Runnable> queue;
-    private final Thread[] threads;
-    private boolean isRunning = true;
+public class MyFixedThreadPool extends MyThreadPool {
 
     public MyFixedThreadPool(int count) {
-        queue = new LinkedList<>();
         threads = new Thread[count];
 
         for (int i = 0; i < count; i++) {
@@ -23,24 +15,6 @@ public class MyFixedThreadPool implements MyExecutorService {
             synchronized (queue) {
                 queue.offer(runnable);
             }
-        }
-    }
-
-    @Override
-    public void shutdown() {
-        isRunning = false;
-    }
-
-    @Override
-    public int countWorkedThread() {
-        return (int) Arrays.stream(threads).filter(t -> t.isAlive()).count();
-    }
-
-    @Override
-    public void shutdownNow() {
-        shutdown();
-        for (Thread t : threads) {
-            t.interrupt();
         }
     }
 
