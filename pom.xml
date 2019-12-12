@@ -23,6 +23,7 @@
         <module>homework10</module>
         <module>class-work-reflection</module>
         <module>homework11</module>
+        <module>homework12</module>
     </modules>
 
     <dependencies>
