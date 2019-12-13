@@ -51,7 +51,7 @@ public class Main {
             threadList.add(new Thread(counterUnicWords));
         }
 
-        threadList.forEach(th -> th.start());
+        threadList.forEach(thread -> thread.start());
 
         for (Thread th : threadList) {
             try {
