@@ -1,0 +1,52 @@
+SHOW TABLES;
+
+DROP TABLE IF EXISTS Students;
+CREATE TABLE Students(
+    id INT IDENTITY (1,1),
+    name VARCHAR(30),
+    PRIMARY KEY (id)
+                     );
+
+DROP TABLE IF EXISTS Lessons;
+CREATE TABLE Lessons(
+    id INT IDENTITY (1,1),
+    name VARCHAR(30),
+    date DATE,
+    PRIMARY KEY (id)
+                    );
+
+DROP TABLE IF EXISTS Student_Visits;
+CREATE TABLE Student_Visits(
+    student_id INT NOT NULL,
+    lesson_id INT NOT NULL,
+    FOREIGN KEY (student_id) REFERENCES Students(id),
+    FOREIGN KEY (lesson_id) REFERENCES Lessons(id)
+                          );
+
+
+TRUNCATE TABLE Students;
+INSERT INTO Students VALUES (default, 'Ivan'),
+                            (default, 'Anton'),
+                            (default, 'Ignat'),
+                            (default, 'Seva');
+SELECT * FROM Students;
+
+TRUNCATE TABLE Lessons;
+INSERT INTO Lessons VALUES (default, 'Math', '2020-05-01'),
+                           (default, 'Russian', '2020-05-01'),
+                           (default, 'English', '2020-05-01'),
+                           (default, 'Geomertry', '2020-05-01');
+SELECT * FROM Lessons;
+
+TRUNCATE TABLE Student_Visits;
+INSERT INTO Student_Visits VALUES (1, 1),
+                                  (1, 2),
+                                  (1, 3),
+                                  (1, 4),
+                                  (2, 1);
+SELECT * FROM Student_Visits;
+
+SELECT s.name, l.name, l.date
+FROM Students s
+JOIN Student_Visits sv on s.id = sv.student_id
+JOIN Lessons l on sv.lesson_id = l.id;
