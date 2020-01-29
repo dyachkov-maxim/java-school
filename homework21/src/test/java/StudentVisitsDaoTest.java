@@ -5,9 +5,6 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Optional;
-
-import static org.junit.Assert.*;
 
 public class StudentVisitsDaoTest {
 
@@ -77,7 +74,7 @@ public class StudentVisitsDaoTest {
         dao.save(studentVisits);
         Assert.assertTrue(dao.getAll().size() == 6);
 
-        dao.delete(6);
+        dao.delete(5);
         Assert.assertTrue(dao.getAll().size() == 5);
     }
 }

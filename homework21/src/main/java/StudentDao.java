@@ -7,6 +7,7 @@ import java.util.Optional;
 public class StudentDao implements Dao<Student> {
 
     private Connection connection;
+
     //language=SQL
     private final String SQL_SELECT_ALL = "SELECT * FROM Students;";
     //language=SQL
@@ -17,7 +18,6 @@ public class StudentDao implements Dao<Student> {
     private final String SQL_DELETE_BY_ID = "DELETE FROM Students WHERE id = ?";
     //language=SQL
     private final String SQL_UPDATE_BY_ID = "UPDATE Students SET name = ? WHERE id = ?";
-
 
     public StudentDao(DataSource dataSource) {
         try {

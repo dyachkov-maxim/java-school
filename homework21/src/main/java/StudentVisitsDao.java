@@ -8,11 +8,11 @@ public class StudentVisitsDao implements Dao<StudentVisits> {
     private Connection connection;
 
     //language=SQL
-    private final String SQL_SELECT_ALL = "SELECT * FROM Student_Visits WHERE is_delete = FALSE;";
+    private final String SQL_SELECT_ALL = "SELECT * FROM Student_Visits WHERE IS_DELETE = FALSE;";
     //language=SQL
     private final String SQL_INSERT = "INSERT INTO Student_Visits VALUES (?, ?, ?);";
     //language=SQL
-    private final String SQL_DELETE = "UPDATE Student_Visits SET is_delete = FALSE WHERE student_id = ? AND lesson_id = ?;";
+    private final String SQL_DELETE = "UPDATE Student_Visits SET is_delete = TRUE WHERE student_id = ? AND lesson_id = ?;";
 
 
     public StudentVisitsDao(DataSource dataSource) {
@@ -56,7 +56,7 @@ public class StudentVisitsDao implements Dao<StudentVisits> {
         try {
             PreparedStatement statement = connection.prepareStatement(SQL_INSERT);
             statement.setInt(1, studentVisits.getStudent_id());
-            statement.setInt(2, studentVisits.getStudent_id());
+            statement.setInt(2, studentVisits.getLesson_id());
             statement.setBoolean(3, false);
             int result = statement.executeUpdate();
         } catch (SQLException e) {
@@ -74,7 +74,7 @@ public class StudentVisitsDao implements Dao<StudentVisits> {
         try {
             PreparedStatement statement = connection.prepareStatement(SQL_DELETE);
             statement.setInt(1, 2);
-            statement.setInt(2, 2);
+            statement.setInt(2, 1);
             int result = statement.executeUpdate();
         } catch (SQLException e) {
             throw new IllegalStateException(e);
